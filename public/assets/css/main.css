@@ -339,21 +339,21 @@ section {
     color: var(--color-primary);
   }
 
-  .navbar .dropdown a:hover:before,
+  /* .navbar .dropdown a:hover:before,
   .navbar .dropdown:hover>a:before,
   .navbar .dropdown .active:before {
     visibility: hidden;
-  }
+  } */
 
-  .navbar .dropdown a:hover,
+  /* .navbar .dropdown a:hover,
   .navbar .dropdown .active,
   .navbar .dropdown .active:focus,
   .navbar .dropdown:hover>a {
     color: var(--color-white);
     background: var(--color-secondary);
-  }
+  } */
 
-  .navbar .dropdown ul {
+  /* .navbar .dropdown ul {
     display: block;
     position: absolute;
     left: 0;
@@ -377,25 +377,41 @@ section {
     text-transform: none;
     font-weight: 400;
     color: rgba(var(--color-white-rgb), 0.5);
-  }
+  } */
 
-  .navbar .dropdown ul a i {
+  /* .navbar .dropdown ul a i {
     font-size: 12px;
-  }
+  } */
 
-  .navbar .dropdown ul a:hover,
+  /* .navbar .dropdown ul a:hover,
   .navbar .dropdown ul .active,
   .navbar .dropdown ul .active:hover,
   .navbar .dropdown ul li:hover>a {
     color: var(--color-white);
     background: var(--color-primary);
-  }
+  } */
 
-  .navbar .dropdown:hover>ul {
+  /* .navbar .dropdown:hover>ul {
     opacity: 1;
     visibility: visible;
+  } */
+  .dropdown {
+    position: relative;
+    display: inline-block;
   }
-
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 50px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 0px;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
   .navbar .megamenu {
     position: static;
   }
@@ -423,7 +439,7 @@ section {
     background: var(--color-primary);
   }
 
-  .navbar .dropdown .dropdown ul {
+  /* .navbar .dropdown .dropdown ul {
     top: 0;
     left: calc(100% - 30px);
     visibility: hidden;
@@ -444,7 +460,7 @@ section {
 
   .navbar .dropdown .dropdown:hover>ul {
     left: -100%;
-  }
+  } */
 }
 
 /*--------------------------------------------------------------
@@ -499,7 +515,7 @@ section {
     color: var(--color-white);
   }
 
-  .navbar .dropdown ul,
+  /* .navbar .dropdown ul,
   .navbar .dropdown .dropdown ul {
     position: static;
     display: none;
@@ -512,7 +528,7 @@ section {
   .navbar .dropdown>.dropdown-active,
   .navbar .dropdown .dropdown>.dropdown-active {
     display: block;
-  }
+  } */
 
   .mobile-nav-toggle {
     display: block !important;

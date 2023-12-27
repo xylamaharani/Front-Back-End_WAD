@@ -36,6 +36,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -51,12 +52,24 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="index.html#home">Home</a></li>
+        <li><a class="nav-link scrollto" href="index.html#home">Home</a></li>
+        <li class="dropdown">
+            <a class="nav-link scrollto" href="#">Profile</a>
+            <div class="dropdown-content">
+              <a><form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="btn text-right p-0">Logout</button>
+                        </form></a>
+              <a href="#">Update Dementor</a>
+              <a href="#">Update Dementee</a>
+              <a href="#">Delete Akun</a>
+            </div>
+          </li>
           <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
           <li><a class="nav-link scrollto" href="index.html#locate">Locate</a></li>
           <li><a class="nav-link scrollto" href="index.html#treatment">Treatment</a></li>
           <li><a class="nav-link scrollto" href="index.html#portfolio">Portfolio</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li><a class="nav-link scrollto" href="blog.html">Blog</a></li>
           <li><a class="nav-link scrollto" href="index.html#team">Team</a></li>
           <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
         </ul>
@@ -69,12 +82,6 @@
     <div class="container d-flex flex-column align-items-center position-relative" data-aos="zoom-out">
       <h2>Welcome to <span>Dementor</span></h2>
       <p> Teknologi Cerdas Sahabat Pemantau Posisi Pasien Demensia</p>
-      <div class="d-flex">
-      <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn text-right p-0">Logout</button>
-                        </form>
-    </div>
     </div>
   </section>
 

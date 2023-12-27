@@ -21,22 +21,45 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    // Register Logic
     public function register(Request $request)
     {
 
+    // Check the user role and create a record accordingly
+    if ($request->input('role') === 'Dementor') {
         $user = User::create([
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'role'=> $request->input('role'),
+            'nama' => $request->input('nama'),
+            'nik' => $request->input('nik'),
+            'usia' => $request->input('usia'),
+            'alamat' => $request->input('alamat'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
         ]);
+    } elseif ($request->input('role') === 'Dementee') {
+        $user = User::create([
+            'role'=> $request->input('role'),
+            'nama' => $request->input('nama'),
+            'nik' => $request->input('nik'),
+            'usia' => $request->input('usia'),
+            'alamat' => $request->input('alamat'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
+    } else {
+        // Handle invalid role
+        return redirect()->route('register')->with('error', 'Invalid role');
+    }
 
         event(new Registered($user));
         Auth::login($user);
         return redirect(RouteServiceProvider::HOME);
     }
 
+    // Login Logic
     public function login(Request $request)
     {
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -45,10 +68,17 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('home');
+            return redirect(RouteServiceProvider::HOME);
         }
 
         return redirect()->back()->with('error', 'Invalid Credentials');
+    }
+
+    // Logout Logic
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 
     public function destroy(Request $request)
