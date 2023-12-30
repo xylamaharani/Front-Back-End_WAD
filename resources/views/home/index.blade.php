@@ -60,9 +60,14 @@
                             @csrf
                             <button type="submit" class="btn text-right p-0">Logout</button>
                         </form></a>
-              <a href="#">Update Dementor</a>
-              <a href="#">Update Dementee</a>
-              <a href="#">Delete Akun</a>
+              <a href="edit">Update Dementor</a>
+              <a href="dementee">Lihat Data Pasien Dementor</a>
+              <a href="edit">Update Dementee</a>
+              <a href="{{ route('delete') }}" onclick="event.preventDefault(); document.getElementById('delete').submit();">Delete Akun</a>
+              <form id="delete" action="{{ route('delete') }}" method="POST" style="display: none;">
+                @csrf
+                @method('delete')
+              </form>
             </div>
           </li>
           <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
