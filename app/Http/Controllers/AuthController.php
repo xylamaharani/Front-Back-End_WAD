@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dementee;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -74,6 +75,53 @@ class AuthController extends Controller
         return redirect()->back()->with('error', 'Invalid Credentials');
     }
 
+    //Logic Dapetin Form Edit
+    public function showEditForm(){
+        $user = Auth::user();
+        return view('auth.edit', compact('user'));
+    }
+
+    //Logic Edit akun 
+    public function edit(Request $request){
+
+        // Menambahkan Validasi
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'nik' => 'required',
+            'usia' => 'required',
+            'alamat' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        
+        $user = User::find(Auth::id());
+
+
+        if ($user){
+            if ($request->input('role') === 'Dementor' || $request->input('role') === 'Dementee') {
+                $user->update($request->all());
+
+                return redirect()->route('home')->with('success', 'Profile berhasil diupdate');
+
+            } else {
+                // Handle invalid role
+                return redirect()->route('edit')->with('error', 'Invalid role');
+            }
+        }
+
+        return redirect()->route('edit')->with('error', 'User tidak ditemukan');
+        
+    }
+
+    // Logic Delete Akun
+    public function delete(){
+    $user = User::find(Auth::id());
+    $user->delete();
+
+    return redirect('/')->with('success', 'Akun sudah terdelete');
+    }
+
+
     // Logout Logic
     public function logout()
     {
@@ -87,5 +135,12 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+    
+    #Login Read Data Dari Tabel Dementee
+    public function dementee(){
+        $dementee = Dementee::all();
+
+        return view('auth.dementee',compact(['dementee']));
     }
 }
